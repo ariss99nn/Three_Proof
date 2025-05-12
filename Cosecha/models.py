@@ -1,11 +1,19 @@
 from django.db import models
 
 # Create your models here.
+class Clasificacion(models.Model):
+    variedad = models.CharField(max_length=100)
+    clasificacion = models.CharField(max_length=100)
+    detalles = models.TextField()
+    valor_estimado = models.DecimalField(max_digits=10, decimal_places=2)
+    created_at = models.DateTimeField(auto_now_add=True)
 class Harvest_type(models.Model):#modelo de tipo de cosecha
     name = models.CharField(max_length=20) #nombre del tipo de cosecha
-    start_date = models.DateTimeField#fecha de inicio de la cosecha
-    end_date = models.DateTimeField#fecha de finalizacion de la cosecha(AUTOMATIZADO)
-    clasification = models.CharField(max_length=20)#clasificacion de la cosecha(IMPORTADO DESDE PRODUCTO.CLASIFICACION)
+    start_date = models.DateField#fecha de inicio de la cosecha
+    end_date = models.DateField#fecha de finalizacion de la cosecha(AUTOMATIZADO)
+    clasification = models.ForeignKey(Clasificacion, on_delete=models.CASCADE)#clasificacion de la cosecha(IMPORTADO DESDE PRODUCTO.CLASIFICACION)
+    season = models.CharField(max_length=20, default= "2025 A")
+    created_at = models.DateTimeField(auto_now_add= True)
     def __str__(self):
         return self.name#manera en que se muestra el modelo en este caso NOMBRE
     
