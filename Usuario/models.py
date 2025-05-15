@@ -1,20 +1,15 @@
-from django.db import models
 from django.contrib.auth.models import AbstractUser
-import pandas as  pd
+from django.db import models
 
-# Create your models here.
+# Modelo que extiende al usuario base de Django, añadiendo campos personalizados.
 class User(AbstractUser):
-    
-    Rol_Choices = (
-        ('ADMIN', 'Administrator'),
-        ('FARM','Farmer'),
+    first_name = models.CharField(max_length=100)  # Nombre del usuario
+    last_name = models.CharField(max_length=100)   # Apellido del usuario
+    document = models.CharField(max_length=20, unique=True)  # Documento de identidad (único)
+    phone = models.CharField(max_length=15)        # Número de teléfono
+    city = models.CharField(max_length=100)        # Ciudad de residencia
+    role = models.CharField(                      # Rol dentro del sistema
+        max_length=20,
+        choices=[('ADMIN', 'Administrator'), ('AGRICULTOR', 'Farmer')]
     )
-    
-    firstname = models.CharField(max_length=50)
-    lastname = models.CharField(max_length=50)
-    document = models.CharField(max_length=10, unique= True)
-    contact = models.CharField(max_length= 10)
-    email =  models.EmailField
-    role = models.CharField(max_length=20,choices=Rol_Choices)
-    ubication =  models.CharField
-    created_at = models.DateTimeField(auto_now_add= True)
+    created_at = models.DateTimeField(auto_now_add=True)  # Fecha de creación del registro

@@ -1,19 +1,17 @@
 from django.db import models
 
-# Create your models here.
-class Quality(models.Model):#creamos el modelo de calidad
-    name = models.CharField(max_length=20)
-    
-    def __str__(self):
-        return self.name
-    
-
-    
-class Fumigate(models.Model):
-    name_product = models.CharField(max_length=20)
-    price = models.DecimalField(decimal_places=3)#precio predictivo en base a la TAZA DE VALORES
-    description = models.TextField
-    use_case = models.TextField
-    application_method= models.TextField
-    
-    
+   
+# Información de insumos agrícolas utilizados.
+class Input(models.Model):
+    name = models.CharField(max_length=100)                    # Nombre del insumo
+    description = models.TextField()                           # Descripción
+    used_for = models.CharField(max_length=100)                # Uso o propósito
+    application_method = models.CharField(max_length=100)      # Método de aplicación
+    quantity = models.FloatField()                             # Cantidad disponible o aplicada
+    unit_of_measure = models.CharField(                        # Unidad de medida
+        max_length=20,
+        choices=[('kg', 'Kilograms'), ('L', 'Liters')]
+    )
+    created_at = models.DateTimeField(auto_now_add=True)       # Fecha de creación
+    usd_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # NEW
+    local_price = models.DecimalField(max_digits=10, decimal_places=2, null=True, blank=True)  # NEW

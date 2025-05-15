@@ -1,37 +1,43 @@
 from django.db import models
 
-# Create your models here.
-class Clasificacion(models.Model):
-    variedad = models.CharField(max_length=100)
-    clasificacion = models.CharField(max_length=100)
-    detalles = models.TextField()
-    valor_estimado = models.DecimalField(max_digits=10, decimal_places=2)
-    created_at = models.DateTimeField(auto_now_add=True)
-class Harvest_type(models.Model):#modelo de tipo de cosecha
-    name = models.CharField(max_length=20) #nombre del tipo de cosecha
-    start_date = models.DateField#fecha de inicio de la cosecha
-    end_date = models.DateField#fecha de finalizacion de la cosecha(AUTOMATIZADO)
-    clasification = models.ForeignKey(Clasificacion, on_delete=models.CASCADE)#clasificacion de la cosecha(IMPORTADO DESDE PRODUCTO.CLASIFICACION)
-    season = models.CharField(max_length=20, default= "2025 A")
-    created_at = models.DateTimeField(auto_now_add= True)
-    def __str__(self):
-        return self.name#manera en que se muestra el modelo en este caso NOMBRE
-    
-class Harvest(models.Model):#modelo de cosecha
-    name = models.CharField(max_length=20)#nombre de la cosecha
-    amount = models.IntegerField#cantidad recolectada de la cosecha
-    harvest_form = models.BooleanField#forma de recolecccion de la cosecha(MANUAL O MECANIZADA)
-    type = models.ForeignKey(Harvest_type, on_delete=models.CASCADE)#tipo de cosecha(RELACIONAL A MODELO DE TIPO DE COSECHA)
-    
-    def __str__(self):
-        return self.name
+# Clasificación o categoría de un producto o variedad.
+class Classification(models.Model):
+    variety = models.CharField(max_length=100)       # Nombre de la variedad
+    classification = models.CharField(max_length=100)  # Tipo de clasificación
+    details = models.TextField()                     # Detalles adicionales
+    estimated_value = models.DecimalField(max_digits=10, decimal_places=2)  # Valor estimado
+    created_at = models.DateTimeField(auto_now_add=True)  # Fecha de creación
 
-class Report_Harvest(models.Model):#modelo de reporte de la cosecha
-    name = models.ForeignKey(Harvest, on_delete=models.CASCADE)#nombre del reporte
-    clasification = models.CharField(max_length=30)#clasificacion de producto relacionada a (CLASIFICACION DE COSECHA)
-    price = models.DecimalField(decimal_places=2)#precio por el que se podria vender la cosecha
-    quality = models.CharField#calidad de producto(RELACIONAL A CALIDAD DE PRODUCTO )
-    diagram = models.IntegerField#datos que se almacenan para mostrar en una grafica
+
+# Tipo de cosecha relacionada con una clasificación específica.
+class HarvestType(models.Model):
+    name = models.CharField(max_length=100)           # Nombre del tipo de cosecha
+    start_date = models.DateField()                   # Fecha de inicio
+    end_date = models.DateField()                     # Fecha de fin
+    classification = models.ForeignKey(Classification, on_delete=models.CASCADE)  # Clasificación asociada
+    season = models.CharField(max_length=20, default="2025-A")  # Temporada
+    created_at = models.DateTimeField(auto_now_add=True)        # Fecha de creación
     
-    def __str__(self):
-        return self.name
+# Información de una cosecha específica.
+class Harvest(models.Model):
+    name = models.CharField(max_length=100)  # Nombre de la cosecha
+    quantity = models.FloatField()           # Cantidad obtenida
+    harvest_method = models.CharField(       # Método de recolección
+        max_length=20,
+        choices=[('MANUAL', 'Manual'), ('MECANIZED', 'Mechanized')]
+    )
+    type = models.ForeignKey(HarvestType, on_delete=models.CASCADE)  # Tipo de cosecha
+    season = models.CharField(max_length=20, default="2025-A")       # Temporada
+    latitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)   # Ubicación GPS
+    longitude = models.DecimalField(max_digits=9, decimal_places=6, null=True, blank=True)
+    created_at = models.DateTimeField(auto_now_add=True)             # Fecha de creación
+
+# Detalles de calidad y rentabilidad de una cosecha.
+class HarvestDetails(models.Model):
+    classification = models.ForeignKey(Classification, on_delete=models.CASCADE)  # Clasificación del producto
+    estimated_price = models.DecimalField(max_digits=10, decimal_places=2)        # Precio estimado
+    profit_margin = models.FloatField()                                           # Margen de ganancia
+    overall_quality = models.CharField(max_length=100)                            # Calidad general
+    diagram_data = models.JSONField()                                             # Datos visuales (diagrama o gráfico)
+    created_at = models.DateTimeField(auto_now_add=True)                          # Fecha de creación
+    
