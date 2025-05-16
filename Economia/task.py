@@ -1,8 +1,8 @@
 from celery import shared_task
-from products.models import Product
-from inputs.models import Input
-from sales.models import Sale
-from economy.models import EconomicIndicator
+from Productos.models import Product
+from Inventario.models import Input
+from Ventas.models import Sale
+from Economia.models import EconomicIndicator
 
 @shared_task
 def update_product_prices():
