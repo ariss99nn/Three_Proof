@@ -1,5 +1,5 @@
 from rest_framework import serializers
-from .models import Harvest, Classification, HarvestType, HarvestDetails
+from .models import Harvest, Classification, Harvest_Type, Harvest_Details
 
 class Classification_Serializer(serializers.Serializer):
     class Meta:
@@ -14,10 +14,10 @@ class Harvest_Serializer(serializers.Serializer):#creamos el serilizador de cose
         
 class Harvest_type_Serializer(serializers.Serializer):
     class Meta:#clase para mostrar los datos
-        model = HarvestType#seleccionamos el modelo de tipo cosecha
+        model = Harvest_Type#seleccionamos el modelo de tipo cosecha
         fields = 'all'#los campos que se van a mostrar(ALL SE REIERE A TODOS LOS CAMPOS)
         
 class HarvestDeatils_Serializers(serializers.Serializer):
     class Meta:
-        model=HarvestDetails
+        model=Harvest_Details
         fields = '__all__'

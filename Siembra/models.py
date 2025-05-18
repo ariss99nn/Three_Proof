@@ -1,5 +1,6 @@
 from django.db import models
-
+from Productos.models import Product
+from Suelo.models import SoilAnalysis
 # Información de una siembra.
 class Sowing(models.Model):
     name = models.CharField(max_length=100)           # Nombre de la siembra
