@@ -28,7 +28,7 @@ DEBUG = True
 
 ALLOWED_HOSTS = []
 
-
+AUTH_USER_MODEL = 'Usuario.User'
 # Application definition
 
 INSTALLED_APPS = [
@@ -50,7 +50,7 @@ INSTALLED_APPS = [
     'Suelo',
     'Usuario',
     'Ventas',
-    'economia.apps.EconomiaConfig'
+    # 'conomia.apps.EconomiaConfig'
 ]
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
