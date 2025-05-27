@@ -1,0 +1,41 @@
+py manage.py makemigrations Cosecha
+py manage.py makemigrations Economia
+py manage.py makemigrations Estadistica
+py manage.py makemigrations Inventario
+py manage.py makemigrations Inversion
+py manage.py makemigrations Monitoreo
+py manage.py makemigrations Prediccion
+py manage.py makemigrations Productos
+py manage.py makemigrations Siembra
+py manage.py makemigrations Suelo
+py manage.py makemigrations Usuario
+py manage.py makemigrations Ventas
+
+
+
+from Usuario.models import User
+
+admin_user = User.objects.create_user(
+    username='admin',
+    password='adminpassword123',
+    email='admin@example.com',
+    first_name='Admin',
+    last_name='User',
+    document='123456789',
+    phone='555-1234',
+    city='Ciudad',
+    role='ADMIN'
+)
+
+admin_user.is_staff = True
+admin_user.is_superuser = True
+admin_user.save()
+
+print("Usuario admin creado:", admin_user.username)
+
+from Usuario.models import User
+user = User.objects.create_user(username='andres', password='admin123', role='ADMIN')
+user.is_staff = True
+user.is_superuser = True
+user.save()
+exit()
