@@ -12,11 +12,15 @@ https://docs.djangoproject.com/en/5.2/ref/settings/
 
 from pathlib import Path
 from Economia.tasks_schedule import CELERY_BEAT_SCHEDULE
+from datetime import timedelta
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
 
-
+SIMPLE_JWT = {
+        'ACCESS_TOKEN_LIFETIME': timedelta(days=1),  # Por ejemplo, un día
+        'REFRESH_TOKEN_LIFETIME': timedelta(days=30), # Por ejemplo, 30 días
+    }
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/5.2/howto/deployment/checklist/
 
@@ -51,8 +55,17 @@ INSTALLED_APPS = [
     'Usuario',
     'Ventas',
     'rest_framework.authtoken',
-    # 'conomia.apps.EconomiaConfig'
+    
+    'AgroHarvest',
+    'Sicora',
+    'Sensores',
+    'django_celery_beat',
+    'rest_framework',
+    'rest_framework_simplejwt',
 ]
+
+    # 'conomia.apps.EconomiaConfig'
+
 CELERY_BROKER_URL = 'redis://localhost:6379/0'
 CELERY_ACCEPT_CONTENT = ['json']
 CELERY_TASK_SERIALIZER = 'json'

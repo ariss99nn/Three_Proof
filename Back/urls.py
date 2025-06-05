@@ -43,6 +43,10 @@ urlpatterns = [
     path('api/', include('Suelo.urls')),
     path('api/', include('Usuario.urls')),
     path('api/', include('Ventas.urls')),
+    path('api/', include('Sensores.urls')),
+    path('api/', include('AgroHarvest.urls')),
+    path('api/', include('Sicora.urls')),
+    
     
     
     
