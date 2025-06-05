@@ -46,7 +46,11 @@ urlpatterns = [
     path('api/', include('Sensores.urls')),
     path('api/', include('AgroHarvest.urls')),
     path('api/', include('Sicora.urls')),
-    
+    path('api/', include('Actuadores_inv.urls')),
+    path('api/', include('Alertas_inv.urls')),
+    path('api/', include('Invernadero.urls')),
+    path('api/', include('Secciones_inv.urls')),
+        
     
     
     

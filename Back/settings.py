@@ -62,6 +62,16 @@ INSTALLED_APPS = [
     'django_celery_beat',
     'rest_framework',
     'rest_framework_simplejwt',
+    
+    #Invernadero_Costeño
+    'Invernadero',
+    'Secciones_inv',
+    'Sensor_inv',
+    'Config_inv',
+    'Lectura_inv',
+    'Alertas_inv',
+    'Actuadores_inv',
+    
 ]
 
     # 'conomia.apps.EconomiaConfig'
@@ -112,7 +122,7 @@ WSGI_APPLICATION = 'Back.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
-        'NAME': 'thr33',
+        'NAME': 'thr33_11',
         'USER': 'postgres',
         'PASSWORD': 'uno',
         'HOST' : 'localhost',
