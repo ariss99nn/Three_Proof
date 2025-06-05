@@ -1,0 +1,53 @@
+import pandas as pd
+
+#Uso de saries en base a un array
+naranjas = pd.Series([4,9,2,6,10,200]) #Creacion de una serie
+manzanas = pd.Series([60,22,1,79,2,8])
+print(naranjas)
+print(manzanas)  
+
+#Uso de series en base a una lista
+
+colores = pd.Series(['rojo', 'verde', 'azul', 'amarillo', 'naranja'])
+print(colores)
+print(colores[2:5])
+
+#Uso de series en base a un diccionario
+
+materias = pd.Series({
+    'Matematicas':60,
+    'Fisica':100, 
+    'Quimica': 78})
+print(materias)
+print(materias['Fisica'])
+print(materias[['Fisica','Quimica']])
+####################### USO DE PROPIEDADES ##############################
+
+numeros = pd.Series([1,2,3,4,5,6,7,8,9])
+
+print(numeros.size)#Muestra el numero de elementos en la serie
+print(numeros.index)#Muestra la secuencia de la serie
+print(numeros.dtype)#Muestra el tipo de los datos almacenados
+
+
+##### OPERACIONES BASICAS ####
+
+print(numeros.groupby(numeros).sum())
+print(numeros+2)
+print(numeros-2)
+
+
+
+
+
+
+from django.db import models
+from cultivo.models importa cultivo
+
+# Create your models here.
+
+
+class requerimiento (models.Model):
+    tipo = models.CharField ()
+    tipo_de_terreno = models.CharField ()
+    Fecha_de_siembra = models.ForeignKey (cultivo.FechaDeSiembra, on_delete=models.CASCADE)

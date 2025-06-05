@@ -8,6 +8,7 @@ class User(AbstractUser):
     document = models.CharField(max_length=20, unique=True)  # Documento de identidad (único)
     phone = models.CharField(max_length=15)        # Número de teléfono
     city = models.CharField(max_length=100)        # Ciudad de residencia
+    email= models.EmailField(max_length=254)     #Email del Usuario
     role = models.CharField(                      # Rol dentro del sistema
         max_length=20,
         choices=[('ADMIN', 'Administrator'), ('AGRICULTOR', 'Farmer')]

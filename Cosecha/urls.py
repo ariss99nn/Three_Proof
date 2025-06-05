@@ -17,6 +17,7 @@ urlpatterns = [
     # Harvest
     path('harvests/', Harvest_List_View.as_view(), name='harvest-list'),
     path('harvests/<int:pk>/', Harvest_Details_view.as_view(), name='harvest-detail'),
+    
 
     # Classification
     path('classifications/', Classification_List_view.as_view(), name='classification-list'),

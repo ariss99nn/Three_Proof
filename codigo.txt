@@ -16,13 +16,13 @@ py manage.py makemigrations Ventas
 from Usuario.models import User
 
 admin_user = User.objects.create_user(
-    username='admin',
-    password='adminpassword123',
-    email='admin@example.com',
+    username='administrador',
+    password='admin123',
+    email='admn@example.com',
     first_name='Admin',
     last_name='User',
-    document='123456789',
-    phone='555-1234',
+    document='126456789',
+    phone='556-1234',
     city='Ciudad',
     role='ADMIN'
 )
@@ -39,3 +39,20 @@ user.is_staff = True
 user.is_superuser = True
 user.save()
 exit()
+
+
+    import jwt
+    from datetime import datetime, timedelta
+
+    def generar_token(usuario, secreto, tiempo_vencimiento):
+        payload = {
+            'exp': datetime.utcnow() + tiempo_vencimiento,
+            'sub': usuario.id,
+            'username': usuario.username
+        }
+        token = jwt.encode(payload, secreto, algorithm='HS256')
+        return token
+
+    # Ejemplo de uso:
+    # tiempo_vencimiento = timedelta(hours=24) # 24 horas
+    # token = generar_token(usuario, 'tu_secreto', tiempo_vencimiento)

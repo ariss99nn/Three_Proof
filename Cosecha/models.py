@@ -7,6 +7,7 @@ class Classification(models.Model):
     details = models.TextField()                     # Detalles adicionales
     estimated_value = models.DecimalField(max_digits=10, decimal_places=2)  # Valor estimado
     created_at = models.DateTimeField(auto_now_add=True)  # Fecha de creación
+    
 
 
 # Tipo de cosecha relacionada con una clasificación específica.
